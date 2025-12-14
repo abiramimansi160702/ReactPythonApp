@@ -59,7 +59,7 @@ def get_profile(token: str):
 
 students = [
     {"id": 1, "name": "Mansi", "age": 21},
-    {"id": 2, "name": "Rishi", "age": 22}
+    {"id": 2, "name": "Dikshant", "age": 22}
 ]
 @app.get("/students")
 def get_students():
