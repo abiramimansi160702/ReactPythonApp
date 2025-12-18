@@ -14,7 +14,7 @@ function Dashboard({ token }) {
 
   // Fetch profile
   useEffect(() => {
-    fetch("http://13.49.224.125:8000/profile?token=" + token)
+    fetch("http://13.49.224.125:80/profile?token=" + token)
       .then(res => res.json())
       .then(data => setUserData(data))
       .catch(err => console.error(err));
@@ -22,7 +22,7 @@ function Dashboard({ token }) {
 
   // Fetch students
   const fetchStudents = () => {
-    fetch("http://13.49.224.125:8000/students")
+    fetch("http://13.49.224.125:80/students")
       .then(res => res.json())
       .then(data => setStudents(data))
       .catch(err => console.error(err));
@@ -39,7 +39,7 @@ function Dashboard({ token }) {
       return;
     }
 
-    fetch("http://13.49.224.125:8000/students", {
+    fetch("http://13.49.224.125:80/students", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, age: Number(age) })
@@ -55,7 +55,7 @@ function Dashboard({ token }) {
 
   // Delete student
   const deleteStudent = (id) => {
-    fetch(`http://13.49.224.125:8000/students/${id}`, { method: "DELETE" })
+    fetch(`http://13.49.224.125:80/students/${id}`, { method: "DELETE" })
       .then(res => res.json())
       .then(() => setStudents(students.filter(s => s.id !== id)));
   };
@@ -69,7 +69,7 @@ function Dashboard({ token }) {
 
   // Save edited student
   const saveEdit = (id) => {
-    fetch(`http://13.49.224.125:8000/students/${id}`, {
+    fetch(`http://13.49.224.125:80/students/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name: editName, age: Number(editAge) })
