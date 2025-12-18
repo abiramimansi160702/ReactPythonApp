@@ -33,6 +33,10 @@ def create_access_token(data: dict, expires_delta: timedelta = timedelta(minutes
     return token
 
 # Login route
+@app.get("/")
+def root():
+    return {"message": "Backend is running"}
+    
 @app.post("/login")
 def login(data: LoginRequest):
     if data.email == "test@demo.com" and data.password == "1234":
