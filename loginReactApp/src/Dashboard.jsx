@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import "./Dashboard.css";
 
-const API_URL = "http://login-react-alb-337425369.eu-north-1.elb.amazonaws.com"; // ✅ ALB
+// ✅ Use your ALB URL
+const API_URL = "http://login-react-alb-337425369.eu-north-1.elb.amazonaws.com";
 
 function Dashboard({ token }) {
   const [userData, setUserData] = useState(null);
@@ -81,7 +82,7 @@ function Dashboard({ token }) {
       })
       .then(() => {
         setEditingId(null);
-        fetchStudents();
+        fetchStudents(); // refresh list
       })
       .catch((err) => alert("Update failed: " + err));
   };

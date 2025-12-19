@@ -2,7 +2,8 @@ import { useState } from "react";
 import Dashboard from "./Dashboard";
 import "./App.css";
 
-const API_URL = "http://login-react-alb-337425369.eu-north-1.elb.amazonaws.com"; // ✅ Your ALB
+// ✅ Use your ALB URL
+const API_URL = "http://login-react-alb-337425369.eu-north-1.elb.amazonaws.com";
 
 function App() {
   const [username, setUsername] = useState("");
@@ -22,7 +23,7 @@ function App() {
         const data = await response.json();
         setToken(data.token); // save token
       } else {
-        alert("Login failed!");
+        alert("Login failed! Check your credentials.");
       }
     } catch (err) {
       console.error("Error connecting to backend:", err);
