@@ -1,0 +1,134 @@
+/* Container for whole dashboard */
+.dashboard-container {
+  max-width: 900px;
+  margin: 40px auto;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 0 20px;
+}
+
+/* Profile Card */
+.profile-card {
+  background: #f8f9fa;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Add Student Form */
+.add-student-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.add-student-card input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.add-student-card button {
+  padding: 12px;
+  background-color: #28a745;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.add-student-card button:hover {
+  background-color: #218838;
+}
+
+/* Students List */
+.students-list-card {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.students-list-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.student-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  margin-bottom: 10px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  gap: 10px;
+}
+
+/* Student item buttons */
+.student-item button {
+  margin-left: 6px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+/* Edit button */
+.student-item button.edit-btn {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.student-item button.edit-btn:hover {
+  background-color: #e0a800;
+}
+
+/* Delete button */
+.student-item button.delete-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.student-item button.delete-btn:hover {
+  background-color: #c82333;
+}
+
+/* Save button */
+.student-item button.save-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.student-item button.save-btn:hover {
+  background-color: #218838;
+}
+
+/* Cancel button */
+.student-item button.cancel-btn {
+  background-color: #6c757d;
+  color: white;
+}
+
+.student-item button.cancel-btn:hover {
+  background-color: #5a6268;
+}
+
+/* Inline edit inputs */
+.student-item input {
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 100px;
+}
