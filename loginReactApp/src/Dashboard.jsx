@@ -1,31 +1,32 @@
 import { useEffect, useState } from "react";
 import "./Dashboard.css";
 
+const API_URL = "http://login-react-alb-337425369.eu-north-1.elb.amazonaws.com"; // ✅ ALB
+
 function Dashboard({ token }) {
   const [userData, setUserData] = useState(null);
   const [students, setStudents] = useState([]);
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
 
-  // Edit state
   const [editingId, setEditingId] = useState(null);
   const [editName, setEditName] = useState("");
   const [editAge, setEditAge] = useState("");
 
   // Fetch profile
   useEffect(() => {
-    fetch("http://13.49.224.125:80/profile?token=" + token)
-      .then(res => res.json())
-      .then(data => setUserData(data))
-      .catch(err => console.error(err));
-  }, []);
+    fetch(`${API_URL}/api/profile?token=${token}`)
+      .then((res) => res.json())
+      .then((data) => setUserData(data))
+      .catch((err) => console.error(err));
+  }, [token]);
 
   // Fetch students
   const fetchStudents = () => {
-    fetch("http://13.49.224.125:80/students")
-      .then(res => res.json())
-      .then(data => setStudents(data))
-      .catch(err => console.error(err));
+    fetch(`${API_URL}/api/students`)
+      .then((res) => res.json())
+      .then((data) => setStudents(data))
+      .catch((err) => console.error(err));
   };
 
   useEffect(() => {
@@ -39,13 +40,13 @@ function Dashboard({ token }) {
       return;
     }
 
-    fetch("http://13.49.224.125:80/students", {
+    fetch(`${API_URL}/api/students`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, age: Number(age) })
+      body: JSON.stringify({ name, age: Number(age) }),
     })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         alert("Student added!");
         setStudents([...students, data.student]);
         setName("");
@@ -55,9 +56,9 @@ function Dashboard({ token }) {
 
   // Delete student
   const deleteStudent = (id) => {
-    fetch(`http://13.49.224.125:80/students/${id}`, { method: "DELETE" })
-      .then(res => res.json())
-      .then(() => setStudents(students.filter(s => s.id !== id)));
+    fetch(`${API_URL}/api/students/${id}`, { method: "DELETE" })
+      .then((res) => res.json())
+      .then(() => setStudents(students.filter((s) => s.id !== id)));
   };
 
   // Start editing
@@ -69,34 +70,32 @@ function Dashboard({ token }) {
 
   // Save edited student
   const saveEdit = (id) => {
-    fetch(`http://13.49.224.125:80/students/${id}`, {
+    fetch(`${API_URL}/api/students/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name: editName, age: Number(editAge) })
+      body: JSON.stringify({ name: editName, age: Number(editAge) }),
     })
-      .then(res => {
+      .then((res) => {
         if (!res.ok) throw new Error("Update failed");
         return res.json();
       })
       .then(() => {
         setEditingId(null);
-        fetchStudents(); // refresh list
+        fetchStudents();
       })
-      .catch(err => alert("Update failed: " + err));
+      .catch((err) => alert("Update failed: " + err));
   };
 
   if (!userData) return <h2>Loading dashboard...</h2>;
 
   return (
     <div className="dashboard-container">
-      {/* Profile */}
       <div className="profile-card">
         <h1>Welcome, {userData.username}!</h1>
         <p>Age: {userData.age}</p>
         <p>Role: {userData.role}</p>
       </div>
 
-      {/* Add Student */}
       <div className="add-student-card">
         <h2>Add Student</h2>
         <input
@@ -114,7 +113,6 @@ function Dashboard({ token }) {
         <button onClick={addStudent}>Add Student</button>
       </div>
 
-      {/* Students List */}
       <div className="students-list-card">
         <h2>Students List</h2>
         <ul>

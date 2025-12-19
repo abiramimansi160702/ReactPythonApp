@@ -1,6 +1,8 @@
 import { useState } from "react";
 import Dashboard from "./Dashboard";
-import "./App.css"; // make sure we import CSS
+import "./App.css";
+
+const API_URL = "http://login-react-alb-337425369.eu-north-1.elb.amazonaws.com"; // ✅ Your ALB
 
 function App() {
   const [username, setUsername] = useState("");
@@ -9,18 +11,22 @@ function App() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://13.49.224.125:80/login", {
+    try {
+      const response = await fetch(`${API_URL}/api/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: username, password }),
+      });
 
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: username, password }),
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      setToken(data.token); // save token
-    } else {
-      alert("Login failed!");
+      if (response.ok) {
+        const data = await response.json();
+        setToken(data.token); // save token
+      } else {
+        alert("Login failed!");
+      }
+    } catch (err) {
+      console.error("Error connecting to backend:", err);
+      alert("Cannot reach backend server.");
     }
   };
 
